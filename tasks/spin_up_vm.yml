@@ -2,6 +2,6 @@
 - name: Execute order 66
   command: packer build {{ pwd }}/builds/{{ item }}/{{ os_name }}_packer_{{ item }}.json
   args:
-    chdir: "builds/{{ item }}/"
+    chdir: "{{ pwd }}/builds/{{ item }}"
   with_items:
     - "{{ vm_name }}"
