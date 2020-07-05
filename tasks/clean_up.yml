@@ -3,7 +3,7 @@
   file:
     path: "{{ item }}"
     state: absent
-  when: destroy|default(false)|bool == true
+  when: destroy|default(true)|bool == true
   with_items:
     - "{{ packer_output_dir }}"
     - "{{ packer_cache_dir }}"

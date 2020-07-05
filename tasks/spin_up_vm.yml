@@ -1,6 +1,8 @@
 ---
 - name: Execute order 66
-  command: packer build {{ packer_file }}
+  command: packer build {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item }}.json
   args:
-    chdir: centos/
-  register: result
+    chdir: "{{ os_family }}/"
+  with_items:
+    - "{{ vm_name }}"
+

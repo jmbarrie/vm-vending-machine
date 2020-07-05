@@ -1,6 +1,5 @@
 {
   "variables": {
-    "iso": "<PWD>/centos/CentOS-7-x86_64-Minimal-1511.iso",
     "checksum": "659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
     "checksum_type": "SHA256",
     "ks_path": "7/ks.cfg"
@@ -8,7 +7,10 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "iso_url": "{{ user `iso` }}",
+      "iso_urls": [
+        "<PWD>/centos/CentOS-7-x86_64-Minimal-2003.iso",
+        "http://mirror.fileplanet.com/centos/7.8.2003/isos/x86_64/CentOS-7-x86_64-Minimal-2003.iso"
+      ],
       "iso_checksum": "{{ user `checksum_type` }}:{{ user `checksum` }}",
       "vm_name": <VM_NAME>,
       "cpus": <CPU_NUM>,

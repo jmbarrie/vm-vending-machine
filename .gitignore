@@ -1,2 +1,6 @@
+*.iso
 .idea/workspace.xml
 .DS_Store
+output-virtualbox-iso/
+packer_cache/
+*_packer_*.json
