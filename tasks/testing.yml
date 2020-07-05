@@ -1,9 +1,0 @@
----
-- name: Testing range loop
-  debug:
-    msg:
-      - "{{ item[0] }}"
-      - "{{ item[1] }}"
-  with_nested:
-    - "{{ vm_name }}"
-    - [ 'test1', 'test2', 'test3' ]
