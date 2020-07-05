@@ -25,3 +25,8 @@
         { regexp: "<DISK_SIZE>", replacement: '"{{ vm_disk_size }}"'},
         { regexp: "<PWD>", replacement: '{{ pwd }}'}
       ]
+- name: Validate Packer file
+  command: packer validate {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item }}.json
+  register: result
+  with_items:
+    - "{{ vm_name }}"
