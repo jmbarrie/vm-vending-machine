@@ -1,0 +1,19 @@
+---
+- name: Deletes build directory if it exists.
+  file:
+    path: "{{ pwd }}/builds/{{ item }}"
+    state: absent
+  with_items:
+    - "{{ vm_name }}"
+- name: Create VM directory in builds directory.
+  file:
+    path: "{{ pwd }}/builds/{{ item }}"
+    state: directory
+  with_items:
+    - "{{ vm_name }}"
+- name: Copy kickstart file to build directories.
+  copy:
+    src: "{{ pwd }}/{{ os_family }}/http"
+    dest: "{{ pwd }}/builds/{{ item }}"
+  with_items:
+    - "{{ vm_name }}"

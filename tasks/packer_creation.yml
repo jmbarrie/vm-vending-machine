@@ -1,19 +1,13 @@
 ---
-- name: Deletes Packer file if it exists
-  file:
-    path: "{{ pwd }}/builds/{{ os_name }}_{{ item }}.json"
-    state: absent
-  with_items:
-    - "{{ vm_name }}"
 - name: Copy template file and create Packer file
   copy:
     src: "{{ pwd }}/{{ os_family }}/{{ os_name }}.json.template"
-    dest: "{{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item }}.json"
+    dest: "{{ pwd }}/builds/{{ item }}/{{ os_name }}_packer_{{ item }}.json"
   with_items:
     - "{{ vm_name }}"
 - name: Replace VirtualBox VM criteria in Packer file
   replace:
-    path: "{{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item[0] }}.json"
+    path: "{{ pwd }}/builds/{{ item[0] }}/{{ os_name }}_packer_{{ item[0] }}.json"
     regexp: "{{ item[1].regexp }}"
     replace: "{{ item[1].replacement }}"
   with_nested:
@@ -26,7 +20,7 @@
         { regexp: "<PWD>", replacement: '{{ pwd }}'}
       ]
 - name: Validate Packer file
-  command: packer validate {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item }}.json
+  command: packer validate {{ pwd }}/builds/{{ item }}/{{ os_name }}_packer_{{ item }}.json
   register: result
   with_items:
     - "{{ vm_name }}"
