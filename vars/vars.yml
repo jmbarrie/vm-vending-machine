@@ -14,8 +14,3 @@ vm_cpu_num: 1
 vm_audio: none
 vm_disk_size: 10240
 
-# Packer specific variables
-packer_output_dir: "{{ pwd }}/{{ os_family }}/output-virtualbox-iso"
-packer_cache_dir: "{{ pwd }}/{{ os_family }}/packer_cache"
-
-
