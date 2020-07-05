@@ -1,0 +1,27 @@
+---
+- name: Deletes Packer file if it exists
+  file:
+    path: "{{ pwd }}/builds/{{ os_name }}_{{ item }}.json"
+    state: absent
+  with_items:
+    - "{{ vm_name }}"
+- name: Copy template file and create Packer file
+  copy:
+    src: "{{ pwd }}/{{ os_family }}/{{ os_name }}.json.template"
+    dest: "{{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item }}.json"
+  with_items:
+    - "{{ vm_name }}"
+- name: Replace VirtualBox VM criteria in Packer file
+  replace:
+    path: "{{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ item[0] }}.json"
+    regexp: "{{ item[1].regexp }}"
+    replace: "{{ item[1].replacement }}"
+  with_nested:
+    - "{{ vm_name }}"
+    - [
+        { regexp: "<VM_NAME>", replacement: '"{{ vm_name[0] }}"'},
+        { regexp: "<MEMORY>", replacement: '"{{ vm_memory }}"'},
+        { regexp: "<CPU_NUM>", replacement: '"{{ vm_cpu_num }}"'},
+        { regexp: "<DISK_SIZE>", replacement: '"{{ vm_disk_size }}"'},
+        { regexp: "<PWD>", replacement: '{{ pwd }}'}
+      ]

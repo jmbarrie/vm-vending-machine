@@ -1,0 +1,14 @@
+---
+- name: "Packer file creator"
+  hosts: localhost
+  connection: local
+
+  vars_files:
+    - vars/vars.yml
+
+  tasks:
+#    - import_tasks: tasks/testing.yml
+    - import_tasks: tasks/packer_creation.yml
+#    - import_tasks: tasks/validate_packer_file.yml
+#    - import_tasks: tasks/clean_up.yml
+#    - import_tasks: tasks/spin_up_vm.yml

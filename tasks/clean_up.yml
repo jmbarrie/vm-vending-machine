@@ -1,0 +1,9 @@
+---
+- name: Deletes Packer and VirtualBox directories if they exist
+  file:
+    path: "{{ item }}"
+    state: absent
+  when: destroy|default(false)|bool == true
+  with_items:
+    - "{{ packer_output_dir }}"
+    - "{{ packer_cache_dir }}"

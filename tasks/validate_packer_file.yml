@@ -1,0 +1,9 @@
+---
+- name: Validate {{ os_name }} Packer file
+  command: packer validate {{ packer_file }}
+  register: result
+- name: Catch bad template
+  fail:
+    msg: result.stdout
+  when: result.stdout != ""
+

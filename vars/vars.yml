@@ -1,0 +1,21 @@
+---
+# Local environment variables
+pwd: "{{ lookup('env', 'PWD') }}"
+
+# VM Config variables
+vm_name:
+  - TestVM1
+  - TestVM2
+os_family: centos
+os_name: centos7
+user_ks_path: centos/http/ks.cfg
+vm_memory: 512
+vm_cpu_num: 1
+vm_audio: none
+vm_disk_size: 10240
+
+# Packer specific variables
+packer_output_dir: "{{ pwd }}/{{ os_family }}/output-virtualbox-iso"
+packer_cache_dir: "{{ pwd }}/{{ os_family }}/packer_cache"
+
+

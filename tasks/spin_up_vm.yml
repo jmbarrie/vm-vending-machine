@@ -1,0 +1,6 @@
+---
+- name: Execute order 66
+  command: packer build {{ packer_file }}
+  args:
+    chdir: centos/
+  register: result
