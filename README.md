@@ -31,7 +31,7 @@ The default settings can be adjusted in the `vars/vars.yml` file under the `Conf
 - VM CPU Cores: 1
 - VM Disk Size: 10240
 
-Aside from installing Ansible on the images, there is currently no other changes to the base CentOS 7 Minimal ISO.
+Aside from installing Ansible on the images, there are no other changes to the base CentOS 7 Minimal ISO.
 
 NOTE: The Packer template is currently implemented to search for the CentOS ISO in the `packer_templates/centos/`
 directory, but this can be adjusted in the `builders.template.json` file. This will change as supported ISO's are 
