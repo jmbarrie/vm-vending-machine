@@ -8,6 +8,6 @@
 
   tasks:
 #    - import_tasks: tasks/testing.yml
-    - import_tasks: tasks/build_setup.yml
+    - import_tasks: tasks/cleanup.yml
     - import_tasks: tasks/packer_creation.yml
     - import_tasks: tasks/spin_up_vm.yml

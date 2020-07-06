@@ -14,13 +14,13 @@ os_family = sys.argv[1]
 os_name = sys.argv[2]
 build_version = sys.argv[3]
 
-packer_template_file = f"{os_family}/{os_name}.template.json"
-merged_packer_file = f"{os_family}/{os_name}_packer_{build_version}.json"
+packer_template_file = f"packer_templates/{os_family}/{os_name}.template.json"
+merged_packer_file = f"packer_templates/{os_family}/{os_name}_packer_{build_version}.json"
 
 data = []
 
 for vm_name in sys.argv[3:]:
-    template_file = f"{sys.argv[1]}/builders/{vm_name}_builder.json"
+    template_file = f"packer_templates/{sys.argv[1]}/builders/{vm_name}_builder.json"
     if path.isfile(template_file):
         with open(template_file, 'r') as builder_file:
             data.append(builder_file.read())

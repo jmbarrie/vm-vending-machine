@@ -1,5 +1,5 @@
 ---
 - name: Execute order 66
-  command: packer build {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ build_version }}.json
+  command: packer build {{ pwd }}/packer_templates/{{ os_family }}/{{ os_name }}_packer_{{ build_version }}.json
   args:
-    chdir: "{{ pwd }}/{{ os_family }}/"
+    chdir: "{{ pwd }}/packer_templates/{{ os_family }}/"

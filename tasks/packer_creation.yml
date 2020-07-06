@@ -1,4 +1,8 @@
 ---
+- name: Create VM directory in builds directory
+  file:
+    path: "{{ pwd }}/packer_templates/{{ os_family }}/builders/"
+    state: directory
 - name: Run builder_setup.py script
   script: "{{ pwd }}/scripts/builder_setup.py {{ os_family }} {{ item }} {{ vm_memory }} {{ vm_cpu_num }} {{ vm_disk_size }} {{ pwd }}"
   args:
@@ -10,5 +14,5 @@
   args:
     executable: python3
 - name: Validate Packer file
-  command: packer validate {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ build_version }}.json
+  command: packer validate {{ pwd }}/packer_templates/{{ os_family }}/{{ os_name }}_packer_{{ build_version }}.json
   register: result

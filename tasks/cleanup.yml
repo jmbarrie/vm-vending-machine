@@ -1,0 +1,16 @@
+---
+- name: Deletes build directory if it exists
+  file:
+    path: "{{ pwd }}/packer_templates/{{ os_family }}/builders/"
+    state: absent
+- name: Deletes VirtualBox output directories
+  file:
+    path: "{{ pwd }}/packer_templates/{{ os_family }}/output-{{ item }}"
+    state: absent
+  with_items:
+    - "{{ vm_name }}"
+- name: Deletes Packer cache directory
+  file:
+    path: "{{ pwd }}/packer_templates/{{ os_family }}/packer_cache/"
+    state: absent
+

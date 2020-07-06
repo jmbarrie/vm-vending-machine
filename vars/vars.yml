@@ -1,14 +1,13 @@
 ---
-# Packer file variables
+# The variables under Config Variables should be updated with desired input
+
+# Config Variables
 build_version: 1
-
-# Local environment variables
-pwd: "{{ lookup('env', 'PWD') }}"
-
-# VM Config variables
 vm_name:
   - TestVM1
-  - TestVM2
+#  - TestVM2
+#  - TestVM3
+#  - TestVM4
 os_family: centos
 os_name: centos7
 user_ks_path: centos/http/ks.cfg
@@ -17,3 +16,5 @@ vm_cpu_num: 1
 vm_audio: none
 vm_disk_size: 10240
 
+# Local Environment Variables
+pwd: "{{ lookup('env', 'PWD') }}"

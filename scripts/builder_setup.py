@@ -16,8 +16,8 @@ cpu_num = sys.argv[4]
 disk_size = sys.argv[5]
 pwd = sys.argv[6]
 
-builder_file = 'templates/builders.template.json'
-output_file = f"{sys.argv[1]}/builders/{vm_name}_builder.json"
+builder_file = 'packer_templates/builders.template.json'
+output_file = f"packer_templates/{sys.argv[1]}/builders/{vm_name}_builder.json"
 
 templated_items = ['<VM_NAME>', '<CPU_NUM>', '<MEMORY>', '<DISK_SIZE>', '<PWD>']
 templated_values = [vm_name, cpu_num, memory, disk_size, pwd]

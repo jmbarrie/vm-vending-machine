@@ -2,7 +2,7 @@
       "type": "virtualbox-iso",
       "name": "<VM_NAME>",
       "iso_urls": [
-        "<PWD>/centos/CentOS-7-x86_64-Minimal-2003.iso",
+        "<PWD>/packer_templates/centos/CentOS-7-x86_64-Minimal-2003.iso",
         "http://mirror.fileplanet.com/centos/7.8.2003/isos/x86_64/CentOS-7-x86_64-Minimal-2003.iso"
       ],
       "iso_checksum": "{{ user `checksum_type` }}:{{ user `checksum` }}",
@@ -14,7 +14,7 @@
       "ssh_username": "root",
       "ssh_password": "packer",
       "ssh_port": 22,
-      "ssh_wait_timeout": "600s",
+      "ssh_wait_timeout": "1000s",
       "http_directory": "http",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `ks_path` }}<enter><wait>"
