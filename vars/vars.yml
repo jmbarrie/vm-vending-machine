@@ -1,4 +1,7 @@
 ---
+# Packer file variables
+build_version: 1
+
 # Local environment variables
 pwd: "{{ lookup('env', 'PWD') }}"
 

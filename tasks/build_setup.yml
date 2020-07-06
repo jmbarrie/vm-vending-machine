@@ -1,19 +1,17 @@
 ---
-- name: Deletes build directory if it exists.
+- name: Deletes build directory if it exists
   file:
-    path: "{{ pwd }}/builds/{{ item }}"
+    path: "{{ pwd }}/{{ os_family }}/builders/"
     state: absent
-  with_items:
-    - "{{ vm_name }}"
-- name: Create VM directory in builds directory.
+- name: Deletes VirtualBox output directories
   file:
-    path: "{{ pwd }}/builds/{{ item }}"
+    path: "{{ pwd }}/{{ os_family }}/output-*/"
+    state: absent
+- name: Deletes Packer cache directory
+  file:
+    path: "{{ pwd }}/{{ os_family }}/packer_cache/"
+    state: absent
+- name: Create VM directory in builds directory
+  file:
+    path: "{{ pwd }}/{{ os_family }}/builders/"
     state: directory
-  with_items:
-    - "{{ vm_name }}"
-- name: Copy kickstart file to build directories.
-  copy:
-    src: "{{ pwd }}/{{ os_family }}/http"
-    dest: "{{ pwd }}/builds/{{ item }}"
-  with_items:
-    - "{{ vm_name }}"

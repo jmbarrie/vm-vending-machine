@@ -10,6 +10,7 @@ Machine processes Packer files in serial, but the intended outcome is to introdu
 Dependencies 
 --------
 Vending Machine is intended to be used with the following tools:
+- Python 3.6+
 - Ansible
 - Packer
 - VirtualBox

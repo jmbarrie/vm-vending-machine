@@ -1,26 +1,14 @@
 ---
-- name: Copy template file and create Packer file
-  copy:
-    src: "{{ pwd }}/{{ os_family }}/{{ os_name }}.json.template"
-    dest: "{{ pwd }}/builds/{{ item }}/{{ os_name }}_packer_{{ item }}.json"
+- name: Run builder_setup.py script
+  script: "{{ pwd }}/scripts/builder_setup.py {{ os_family }} {{ item }} {{ vm_memory }} {{ vm_cpu_num }} {{ vm_disk_size }} {{ pwd }}"
+  args:
+    executable: python3
   with_items:
     - "{{ vm_name }}"
-- name: Replace VirtualBox VM criteria in Packer file
-  replace:
-    path: "{{ pwd }}/builds/{{ item[0] }}/{{ os_name }}_packer_{{ item[0] }}.json"
-    regexp: "{{ item[1].regexp }}"
-    replace: "{{ item[1].replacement }}"
-  with_nested:
-    - "{{ vm_name }}"
-    - [
-        { regexp: "<VM_NAME>", replacement: '"{{ vm_name[0] }}"'},
-        { regexp: "<MEMORY>", replacement: '"{{ vm_memory }}"'},
-        { regexp: "<CPU_NUM>", replacement: '"{{ vm_cpu_num }}"'},
-        { regexp: "<DISK_SIZE>", replacement: '"{{ vm_disk_size }}"'},
-        { regexp: "<PWD>", replacement: '{{ pwd }}'}
-      ]
+- name: Run builder_merge.py script
+  script: "{{ pwd }}/scripts/builder_merge.py {{ os_family }} {{ os_name }} {{ build_version }} {{ vm_name|join(' ') }}"
+  args:
+    executable: python3
 - name: Validate Packer file
-  command: packer validate {{ pwd }}/builds/{{ item }}/{{ os_name }}_packer_{{ item }}.json
+  command: packer validate {{ pwd }}/{{ os_family }}/{{ os_name }}_packer_{{ build_version }}.json
   register: result
-  with_items:
-    - "{{ vm_name }}"
