@@ -5,9 +5,6 @@
 build_version: 1
 vm_name:
   - TestVM1
-#  - TestVM2
-#  - TestVM3
-#  - TestVM4
 os_family: centos
 os_name: centos7
 user_ks_path: centos/http/ks.cfg
