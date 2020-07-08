@@ -11,7 +11,7 @@
         "yum install -y ansible"]
     }
   ],
-    "builders": [
-      <BUILDER>
-    ]
+  "builders": [{% for name in vm_name %}{% include 'builder/builders_' + name + '.j2' %}{% if vm_name|length > 1 and loop.index < vm_name|length %},{% endif %} 
+  {% endfor %}
+  ]
 }

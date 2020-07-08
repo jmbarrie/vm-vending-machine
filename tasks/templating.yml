@@ -1,0 +1,14 @@
+---
+- name: Edit template
+  template:
+    src: builders.json.j2
+    dest: templates/builder/builders_{{ item }}.j2
+  with_items:
+    - "{{ vm_name }}"
+
+- name: Edit the other template
+  template:
+    src: centos7.json.j2
+    dest: build/{{ os_family }}/{{ os_name }}_packer.json
+
+
